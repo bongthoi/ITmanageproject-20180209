@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+ <definition name="admin_tr1" template="/WEB-INF/container/tb_project_employee_tr.jsp"></definition>
+  <definition name="admin_loguer" template="/WEB-INF/container/log-by-user.jsp"></definition>
+  <definition name="admin_SelectProject" template="/WEB-INF/container/SelectProject.jsp"></definition>
+  <definition name="admin_SelectPeople" template="/WEB-INF/container/SelectPeople.jsp"></definition>
+    <definition name="admin_result_report2and3" template="/WEB-INF/container/ResultReport2and3.jsp"></definition>
+     <definition name="admin_result_report1" template="/WEB-INF/container/ResultReport1.jsp"></definition>
+     
+     
+     
+    <definition name="admin_template" template="/WEB-INF/admin/template/template.jsp">
+       <put-attribute name="base_tag"     value="/ITmanageproject/" />
+        <put-attribute name="title_tag"     value="" />
+        <put-attribute name="description_tag"     value="" />
+        <put-attribute name="header"     value="/WEB-INF/admin/template/header.jsp" />
+        <put-attribute name="sidebar"     value="/WEB-INF/admin/template/sidebar.jsp" />
+        <put-attribute name="content"         value="" />
+        <put-attribute name="footer"     value="/WEB-INF/admin/template/footer.jsp" />
+    </definition>
+    
+      <definition name="dashboard" extends="admin_template">
+           <put-attribute name="content"         value="/WEB-INF/admin/dashboard.jsp" />
+    </definition>
+      
+     <definition name="ademployee" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/employee.jsp" />
+    </definition>
+     <definition name="ademployee-detail" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/employee-detail.jsp" />
+    </definition>
+    
+     <definition name="addepartment" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/department.jsp" />
+    </definition>
+
+
+     <definition name="addUser" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/user.jsp" />
+    </definition>
+    
+ <definition name="adproject" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/project.jsp" />
+    </definition>
+     <definition name="adproject-add-edit" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/project-add-update.jsp" />
+    </definition>
+    <definition name="adtask" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/task.jsp" />
+    </definition>
+        <definition name="adtaskview" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/taskview.jsp" />
+    </definition>
+     <definition name="adtaskedit" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/task-edit.jsp" />
+    </definition>
+   <definition name="adtask-create" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/task-create.jsp" />
+    </definition>
+    
+    <definition name="adproject-detail" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/project-detail.jsp" />
+    </definition>
+    
+      <definition name="adreport" extends="admin_template">
+           <put-attribute name="content" value="/WEB-INF/admin/report.jsp" />
+    </definition>
+    
+</tiles-definitions>

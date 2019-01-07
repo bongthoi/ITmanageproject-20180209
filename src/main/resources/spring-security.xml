@@ -1,0 +1,62 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	 http://www.springframework.org/schema/security
+     http://www.springframework.org/schema/security/spring-security.xsd">
+	 <!-- enable use-expressions -->
+	
+	<beans:bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+  
+	<http name="adminauth" 
+	 use-expressions="true"
+	authentication-manager-ref="jdbc-auth" 
+	disable-url-rewriting="true" 
+	auto-config="false">
+	<intercept-url pattern="/dashboard/**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_REVIEW','ROLE_EMPLOYEE','ROLE_LEAD')" />
+		<intercept-url pattern="/publicinfo/**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_REVIEW','ROLE_EMPLOYEE','ROLE_LEAD')" />
+		<intercept-url pattern="/manage/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/management/**" access="hasAnyRole('ROLE_MANAGER','ROLE_LEAD')" />
+		<intercept-url pattern="/review/**" access="hasAnyRole('ROLE_REVIEW','ROLE_MANAGER','ROLE_ADMIN')" />
+		<intercept-url pattern="/login*" access="permitAll"/>
+		<intercept-url pattern="/logout*" access="permitAll"/>
+			<!-- access denied page -->
+		<access-denied-handler error-page="/403" />
+		<form-login
+		    login-page="/login"
+		    default-target-url="/dashboard"
+			authentication-failure-url="/login?error"
+			username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="http://www.khaitamtri.vn/login"  />
+		<!-- <session-management invalid-session-url="/login">
+			<concurrency-control max-sessions="10"
+				expired-url="/" />
+		</session-management>-->
+		<!-- enable csrf protection -->
+			<csrf disabled="true"/>
+			
+	</http>
+	
+
+
+	<!-- Select users and user_roles from database -->
+	<authentication-manager id="in-memory-auth">
+	  <authentication-provider>
+	   <user-service>
+	<user name="u12@gmail.com" password="123456" authorities="ROLE_ADMIN" />
+    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+	
+	<authentication-manager id="jdbc-auth">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="my_dataSource"
+				users-by-username-query="select username,password,enabled from tb_user where username = ? and enabled=1 "
+				authorities-by-username-query="select username,user_role from tb_user where username = ? and enabled=1 " />
+		</authentication-provider>
+	</authentication-manager>
+	
+</beans:beans>	
+	
